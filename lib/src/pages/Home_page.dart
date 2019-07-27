@@ -66,10 +66,12 @@ class HomePage extends StatelessWidget {
         onTap: (){
           // se necesita el context para saber en que parte de la aplicación se va añadir la nueva pantalla
           // el route es para poder saber la ruta y que pantalla se va abrir
-          final route = MaterialPageRoute(
-            builder: (context) => AlertPage()
-          );
-          Navigator.push(context, route);
+          //final route = MaterialPageRoute(
+          //  builder: (context) => AlertPage()
+          //);
+          //Navigator.push(context, route);
+
+          Navigator.pushNamed(context, opt['ruta']);
 
         },
       );
