@@ -26,4 +26,5 @@ class _MenuProvider{
 
 }
 
+// se intancea una sola vez un objeto o provider
 final menuProvider = new _MenuProvider();
