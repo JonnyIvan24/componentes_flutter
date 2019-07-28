@@ -12,6 +12,7 @@ class CardPage extends StatelessWidget {
         padding: EdgeInsets.all(10.0),
         children: <Widget>[
           _cardTipo1(),
+          // ponemos un espacio entre los cards
           SizedBox(height: 30.0,),
           _cardTipo2(),
           SizedBox(height: 30.0,),
@@ -49,6 +50,7 @@ class CardPage extends StatelessWidget {
             children: <Widget>[
               FlatButton(
                 child: Text('Cancelar'),
+                //es necesario definir el metodo de onPressed en los botones para poder dibujarlos en nuestra aplicación
                 onPressed: (){},
               ),
               FlatButton(
@@ -64,6 +66,10 @@ class CardPage extends StatelessWidget {
   }
 
   Widget _cardTipo2(){
+    /*
+    las imagenes dentro de las cards no respetan los bordes de estas asi que es mejor
+    cambiarlas por un container y estas mismas meterlas a otro conteiner donde le daremos bordes, color sombras, etc.
+    */
 
     final card =  Container(
       child: Column(
