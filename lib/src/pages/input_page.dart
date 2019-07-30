@@ -135,7 +135,9 @@ class _InputPageState extends State<InputPage> {
       // hasta que fecha del pasado podemos seleccionar
       firstDate: new DateTime(2018),
       // hasta a que fecha a futuro podemos seleccionar
-      lastDate: new DateTime(2025)
+      lastDate: new DateTime(2025),
+      // cambiamos el idioma a español, tambien se debe de configurar el pubspec.yaml con el sdk de flutter
+      locale: Locale('es', 'MX')
     );
 
     // validamos que el showDatePicker se haya seleccionado una fecha

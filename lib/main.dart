@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:componentes/src/routes/routes.dart';
 
@@ -13,6 +14,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Componentes',
       debugShowCheckedModeBanner: false,
+      // configuración de idiomas para la app
+       localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      // idiomas soportados en la app
+      supportedLocales: [
+        const Locale('en', 'US'), // English
+        const Locale('es', 'MX'), // español mexico
+      ],
       //home: HomePageTemp()
       //home: HomePage()
       initialRoute: '/',
