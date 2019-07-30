@@ -12,6 +12,10 @@ class _InputPageState extends State<InputPage> {
   String _mail = '';
   String _fecha = '';
 
+  String _opcionSeleccionada = 'Volar';
+
+  List<String> _poderes = ['Volar', 'Rayos x', 'Super aliento', 'Super fuerza'];
+
   // el TextEditingController nos sirve para crear un controlador que este al pendiente de las propiedades de un input
   // así podemos cambiar las caracteristicas como tamaño o valor del input, en el momento que este corriendo nuestra app
   // para este caso sera para el de fecha
@@ -31,6 +35,8 @@ class _InputPageState extends State<InputPage> {
           _crearPassword(),
           Divider(),
           _crearFecha(context),
+          Divider(),
+          _crearDropdown(),
           Divider(),
           _crearPersona(),
         ],
@@ -136,7 +142,7 @@ class _InputPageState extends State<InputPage> {
       firstDate: new DateTime(2018),
       // hasta a que fecha a futuro podemos seleccionar
       lastDate: new DateTime(2025),
-      // cambiamos el idioma a español, tambien se debe de configurar el pubspec.yaml con el sdk de flutter
+      // cambiamos el idioma a español, tambien se debe de configurar el pubspec.yaml con el sdk de flutter y tambien en el main.dart
       locale: Locale('es', 'MX')
     );
 
@@ -151,11 +157,51 @@ class _InputPageState extends State<InputPage> {
 
   }
 
+  List<DropdownMenuItem<String>> getOpcionesDropdown() {
+
+    List<DropdownMenuItem<String>> lista = new List();
+
+    _poderes.forEach( (poder) {
+      lista.add(DropdownMenuItem(
+        child: Text(poder),
+        // en el value va el valor del item pero hay que saber que tipo de valor es el que se espera
+        // en este caso es String
+        value: poder,
+      ));
+    });
+
+    return lista;
+
+  }
+
+  Widget _crearDropdown() {
+
+    return Row(
+      children: <Widget>[
+        Icon(Icons.select_all),
+        SizedBox(width: 30.0,),
+        Expanded(
+          child: DropdownButton(
+            value: _opcionSeleccionada,
+            items: getOpcionesDropdown(),
+            onChanged: (opt) {
+              setState(() {
+              _opcionSeleccionada = opt; 
+              });
+            },
+          ),
+        )
+      ],
+    );
+
+  }
+
   Widget _crearPersona() {
 
     return ListTile(
       title: Text('Nombre es $_nombre'),
       subtitle: Text('Email es $_mail'),
+      trailing: Text(_opcionSeleccionada),
     );
 
   }
