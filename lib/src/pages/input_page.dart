@@ -9,6 +9,7 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
 
   String _nombre = '';
+  String _mail = '';
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,10 @@ class _InputPageState extends State<InputPage> {
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
         children: <Widget>[
           _crearInput(),
+          Divider(),
+          _crearEmail(),
+          Divider(),
+          _crearPass(),
           Divider(),
           _crearPersona(),
         ],
@@ -41,11 +46,49 @@ class _InputPageState extends State<InputPage> {
         suffixIcon: Icon(Icons.accessibility),
         icon: Icon(Icons.account_circle)
       ),
-      onChanged: (valor) {
-        setState(() {
+      onChanged: (valor) =>setState(() {
         _nombre = valor;          
-        });
-      },
+        }),
+    );
+
+  }
+
+  Widget _crearEmail(){
+
+    return TextField(
+      keyboardType: TextInputType.emailAddress,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20.0)
+        ),
+        hintText: 'Email',
+        labelText: 'Email',
+        suffixIcon: Icon(Icons.alternate_email),
+        icon: Icon(Icons.email)
+      ),
+      onChanged: (valor) =>setState(() {
+        _mail = valor;          
+        }),
+    );
+
+  }
+
+  Widget _crearPass(){
+
+    return TextField(
+      obscureText: true,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20.0)
+        ),
+        hintText: 'Password',
+        labelText: 'Password',
+        suffixIcon: Icon(Icons.lock_open),
+        icon: Icon(Icons.lock)
+      ),
+      onChanged: (valor) =>setState(() {
+        _mail = valor;          
+        }),
     );
 
   }
@@ -54,6 +97,7 @@ class _InputPageState extends State<InputPage> {
 
     return ListTile(
       title: Text('Nombre es $_nombre'),
+      subtitle: Text('Email es $_mail'),
     );
 
   }
