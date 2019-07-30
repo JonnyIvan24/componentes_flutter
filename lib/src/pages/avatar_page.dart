@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class AvatarPage extends StatelessWidget {
   
+  // al ser propiedad estatica no hace falta otra instancia para acceder a ella
+  static final pageName = 'avatar';
 
   @override
   Widget build(BuildContext context) {
