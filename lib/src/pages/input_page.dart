@@ -10,6 +10,12 @@ class _InputPageState extends State<InputPage> {
 
   String _nombre = '';
   String _mail = '';
+  String _fecha = '';
+
+  // el TextEditingController nos sirve para crear un controlador que este al pendiente de las propiedades de un input
+  // así podemos cambiar las caracteristicas como tamaño o valor del input, en el momento que este corriendo nuestra app
+  // para este caso sera para el de fecha
+  TextEditingController _inputEditDateController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,9 @@ class _InputPageState extends State<InputPage> {
           Divider(),
           _crearEmail(),
           Divider(),
-          _crearPass(),
+          _crearPassword(),
+          Divider(),
+          _crearFecha(context),
           Divider(),
           _crearPersona(),
         ],
@@ -73,7 +81,7 @@ class _InputPageState extends State<InputPage> {
 
   }
 
-  Widget _crearPass(){
+  Widget _crearPassword(){
 
     return TextField(
       obscureText: true,
@@ -90,6 +98,54 @@ class _InputPageState extends State<InputPage> {
         _mail = valor;          
         }),
     );
+
+  }
+
+  Widget _crearFecha( BuildContext context ) {
+
+    return TextField(
+      enableInteractiveSelection: false,
+      // asignación del controlador
+      controller: _inputEditDateController,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20.0)
+        ),
+        hintText: 'Fecha de nacimiento',
+        labelText: 'Fecha',
+        suffixIcon: Icon(Icons.perm_contact_calendar),
+        icon: Icon(Icons.calendar_today)
+      ),
+      onTap: () {
+        // quita el focus o no deja que haya un focus en el input
+        // esto nos sirve para disparar el showDatePicker y no que de seleccionado el input
+        FocusScope.of(context).requestFocus(new FocusNode());
+        _selectDate(context);
+
+      },
+    );
+
+  }
+
+  _selectDate(BuildContext context) async {
+
+    DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: new DateTime.now(),
+      // hasta que fecha del pasado podemos seleccionar
+      firstDate: new DateTime(2018),
+      // hasta a que fecha a futuro podemos seleccionar
+      lastDate: new DateTime(2025)
+    );
+
+    // validamos que el showDatePicker se haya seleccionado una fecha
+    if ( picked != null ){
+      setState(() {
+       _fecha = picked.toString();
+       // cambiamos el valor del texto del input
+       _inputEditDateController.text = _fecha;
+      });
+    }
 
   }
 
