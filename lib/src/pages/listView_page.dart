@@ -60,7 +60,9 @@ class _ListPageState extends State<ListPage> {
 
   Widget _crearLista() {
 
-    return ListView.builder(
+    return RefreshIndicator(
+      onRefresh: obtenerPagina1,
+      child: ListView.builder(
       // asignamos el controlador a la lista
       controller: _scrollController,
       // indicamos con cuantos elementos tiene la lista
@@ -75,7 +77,21 @@ class _ListPageState extends State<ListPage> {
         );
 
       },
+      ),
     );
+
+  }
+
+  Future<Null> obtenerPagina1() async {
+
+    final duration = new Duration( seconds: 2 );
+    new Timer(duration, () {
+      _listaNumeros.clear();
+      _ultimoItem++;
+      _agrtegar10();
+    });
+
+    return Future.delayed(duration);
 
   }
 
